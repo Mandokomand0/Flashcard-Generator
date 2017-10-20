@@ -4,6 +4,9 @@ var fs = require("fs");
 var ClozedCard = require("./Clozed-Card.js");
 var BasicCard = require("./BasicCard.js");
 console.log(BasicCard);
+var basicCreation = new BasicCard();
+var clozedCreation = new ClozedCard();
+
 
 //Inquirer is the basis of my commanding structure.
 var inquirer = require("inquirer");
@@ -42,7 +45,8 @@ var cardUserAndMaker = function() {
               }
               ]).then(function(basic){
                 var basicCardCreation = new BasicCard(basic.question, basic.answer);
-                console.log(basicCardCreation);
+                //console.log(basicCardCreation);
+                basicCreation.cardCreation(basic.question, basic.answer);
                 //function that generates a basic card.
               })
           } else {
@@ -59,8 +63,12 @@ var cardUserAndMaker = function() {
                 message: "What is the answer to your question"
               }
               ]).then(function(cloze){
-                
+                var clozedAnswer = cloze.answer.trim();
+                fullText = cloze.question.replace("_", clozedAnswer + " ");
                 //function that generates a clozed cards.
+                var clozeCardCreation = new ClozedCard(cloze.question, clozedAnswer, fullText);
+                //console.log(basicCardCreation);
+                clozedCreation.cardCreation(cloze.question, clozedAnswer, fullText);
               })
             } else {
               if (choice === "Answer a basic card.") {

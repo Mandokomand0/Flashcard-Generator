@@ -2,13 +2,20 @@ var fs = require("fs");
 //require BasicCard.js?
 var BasicCard = require("./BasicCard.js");
 
-function ClozedCard(clozeQuestion, clozeAnswer) {
+function ClozedCard(clozeQuestion, clozeAnswer, fullText) {
 	this.clozeQuestion = clozeQuestion;
 	this.clozeAnswer = clozeAnswer;
-	this.fullText = clozeQuestion.replace("_", clozeAnswer.trim() + " ");
-	this.card = function(clozeQuestion, clozeAnswer){
-		var newFullText = new fullText(clozeQuestion, clozeAnswer, fullText);
-			file.append("clozed-cards.txt", ClozedCard);
+	this.fullText = fullText;
+	//fullText = this.clozeQuestion.replace("_", clozeAnswer.trim() + " ");
+	this.cardCreation = function(clozeQuestion, clozeAnswer, fullText){
+		//var newFullText = new fullText(clozeQuestion, clozeAnswer, fullText);
+		var newFullText = "\nQuestion: " + clozeQuestion;
+		newFullText+= " Answer: " + clozeAnswer;
+		newFullText += " Full Text: " + fullText;
+
+		//console.log(newBasicCard);
+		fs.appendFile("clozed-cards.txt", newFullText);
+
 	}
 // 	this.fullClozed = function(clozeQuestion, clozeAnswer){
 // 	var newClozeCard = new ClozedCard (name, location);
